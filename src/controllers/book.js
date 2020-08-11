@@ -78,5 +78,14 @@ module.exports = {
         } catch (err) {
             return error(res, 500, err.message)
         }
+    },
+    async fetchAll() {
+        try {
+            let books = await Book.find({}).sort({ price: 'asc' });
+            return books
+        } catch (err) {
+            return err.message
+
+        }
     }
 }

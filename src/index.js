@@ -11,7 +11,7 @@ const seedBooks = require('./seeders/book')
 const LocalStrategy = require('passport-local').Strategy
 var port = PORT || process.env.PORT || 3000
 startDb();
-// seedBooks()
+seedBooks()
 const initRoutes = require('./routes/routes');
 
 app.use(cors());

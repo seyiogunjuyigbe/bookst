@@ -10,9 +10,6 @@ const bookSchema = new Schema({
     price: Number,
     description: String,
     artCover: String,
-    vendor: {
-        type: Schema.Types.ObjectId,
-        ref: "User"
-    }
+    vendor: String
 }, { timestamps: true });
 module.exports = mongoose.model('Book', bookSchema)
