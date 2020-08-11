@@ -35,10 +35,10 @@ exports.register = async (req, res) => {
         const newUser = new User({ ...req.body });
         const user_ = await User.register(newUser, password)
         await user_.save();
-        let token = await user.generateVerificationToken();
+        let token = await user_.generateVerificationToken();
         await token.save()
         const mailOptions = {
-            to: user.email,
+            to: user_.email,
             from: MAIL_SENDER,
             subject: 'Verify your Email',
             html: `<h2>Your account registration was successful.</h2>
@@ -46,9 +46,9 @@ exports.register = async (req, res) => {
         };
         await transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.log({ message: 'Mail not sent', reason: error.message, MAIL_SENDER })
+                console.log({ message: 'Mail not sent', reason: error.message })
             } else {
-                console.log('Mail sent to ' + user.email);
+                console.log('Mail sent to ' + user_.email);
             }
         })
         return res.status(200).redirect('/auth/login')
