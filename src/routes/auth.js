@@ -2,7 +2,7 @@
 const express = require('express');
 const { check } = require('express-validator');
 
-const { login, renderRegister, renderLogin, verify, register, resendToken } = require('../controllers/auth');
+const { login, logout, renderRegister, renderLogin, verify, register, resendToken } = require('../controllers/auth');
 const { recover, reset, resetPassword } = require('../controllers/password');
 const validate = require('../middlewares/validate');
 const { checkAuth } = require('../middlewares/auth')
@@ -18,7 +18,7 @@ router.post("/register", [
 router.get("/login", renderLogin);
 router.get("/register", renderRegister);
 
-// router.get('/logout', logout)
+router.get('/logout', logout)
 router.post("/login", [
     check('email').not().isEmpty().withMessage('email is required'),
     check('password').not().isEmpty().withMessage('password is required'),

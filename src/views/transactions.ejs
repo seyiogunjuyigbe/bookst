@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Book Reaper Transactions</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="../../assets/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="../../assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/slick-carousel/slick/slick.css" />
+    <link rel="stylesheet" href="../../assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+
+    <link rel="stylesheet" href="../../assets/css/theme.css">
+</head>
+
+<body>
+    <!-- transactions table -->
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Ref</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Customer Email</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <% if(transactions.length == 0){ %>
+                <p>No transactions yet</p>
+                <% } else{ %>
+                <% transactions.forEach(transaction=>{%>
+                <tr>
+                    <th scope="row"><%=transactions.indexOf(transaction)%></th>
+                    <td><%=transaction.date_initiated%></td>
+                    <td><%=transaction.title%></td>
+                    <td><%=transaction.reference%></td>
+                    <td><%=transaction.status%></td>
+                    <td><%=transaction.customer.email%></td>
+                </tr>
+                <% })%>
+                <% }%>
+
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+
+</html>

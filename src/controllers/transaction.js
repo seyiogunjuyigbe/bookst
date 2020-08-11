@@ -19,16 +19,28 @@ module.exports = {
         try {
             let transaction = await Transaction.findById(req.params.transactionId).populate('customer book');
             // verify transaction
-            let response = await axios.get(`https://api.flutterwave.com/v3/transactions/${req.query.ref}/verify`);
-            if (response.data.data.amount < transaction.book.price) {
+            let response = await axios.get(`https://api.flutterwave.com/v3/transactions/${req.query.transaction_id}/verify`);
+
+            let data = response.data.data;
+            transaction.reference = data.txt_ref;
+            if (data.status !== "successful") {
+                transaction.status = "failed";
+                await transaction.save()
+                return res.render("error", { message: "Transaction failed" });
+            } else if ((data.status === "successful") && (data.amount < transaction.book.price)) {
                 transaction.status = "conflict"
                 // initiate refund;
+                await transaction.save()
                 return res.render("error", { message: "Transaction error, you paid lesser than the book price" });
-
+            }
+            else if ((data.status === "successful") && (data.currency !== "NGN")) {
+                transaction.status = "conflict"
+                // initiate refund;
+                await transaction.save()
+                return res.render("error", { message: "Transaction error, you paid in a wrong curreny" });
             }
             else {
-
-                transaction.status = "success";
+                transaction.set({ date_paid: new Date(), status: "success" })
                 await transaction.save()
                 const mailOptions = {
                     to: customer.email,
@@ -44,11 +56,21 @@ module.exports = {
                         console.log('Mail sent to ' + user.email);
                     }
                 })
-                return res.render("success", { link: transaction.book.artCover, user: req.user })
+                return res.render("success", { link: transaction.book.artCover, user: req.user, book: transaction.book, transaction })
             }
 
         } catch (err) {
             return res.render("error", { message: err.message })
         }
     },
+    async fetchAllTransactions(req, res) {
+        try {
+            let transactions = await Transaction.find({}).populate('book customer').sort({ date_initiated: "asc" })
+            console.log(transactions)
+            return res.render("transactions", { transactions })
+        } catch (err) {
+            return res.render("error", { message: err.message })
+        }
+
+    }
 }

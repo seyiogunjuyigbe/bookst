@@ -50,11 +50,11 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th scope="row" class="pr-0 py-0 font-weight-medium">1779</th>
-                                            <td class="pr-0 py-0 font-weight-medium">March 24, 2020</td>
-                                            <td class="pr-0 py-0 font-weight-medium text-md-center">$2930</td>
-                                            <td class="pr-md-4 py-0 font-weight-medium text-md-right">Direct bank
-                                                transfer</td>
+                                            <th scope="row" class="pr-0 py-0 font-weight-medium"></th>
+                                            <td class="pr-0 py-0 font-weight-medium">N <%=transaction.date%></td>
+                                            <td class="pr-0 py-0 font-weight-medium text-md-center">N <%=book.price%>
+                                            </td>
+                                            <td class="pr-md-4 py-0 font-weight-medium text-md-right">Card Payment</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -67,13 +67,11 @@
                                     <div class="d-flex justify-content-between mb-4">
                                         <div class="d-flex align-items-baseline">
                                             <div>
-                                                <h6 class="font-size-2 font-weight-normal mb-1">The Overdue Life of <br>
-                                                    Amy Byler</h6>
-                                                <span class="font-size-2 text-gray-600">(Paperback, English)</span>
+                                                <h6 class="font-size-2 font-weight-normal mb-1"><%=book.title%></h6>
                                             </div>
-                                            <span class="font-size-2 ml-4 ml-md-8">x7</span>
                                         </div>
-                                        <span class="font-weight-medium font-size-2">$951</span>
+                                        <span class="font-weight-medium font-size-2">N <%=book.price%></span>
+                                        <a href="<%=link%>">Click here to download</a>
                                     </div>
 
                                 </div>

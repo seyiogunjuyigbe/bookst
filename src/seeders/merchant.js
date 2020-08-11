@@ -8,8 +8,9 @@ module.exports = async () => {
                 password = "securePass",
                 firstName = "Merchant",
                 lastName = "Reaper",
-                phone = "081008787677"
-            const newUser = new User({ email, firstName, lastName, phone });
+                phone = "081008787677",
+                role = "admin"
+            const newUser = new User({ email, firstName, lastName, phone, role });
             const user_ = await User.register(newUser, password)
             await user_.save();
             console.log('Admin Seeded')

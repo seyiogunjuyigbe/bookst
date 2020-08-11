@@ -10,7 +10,7 @@ const userSchema = new Schema({
     phone: String,
     role: {
         type: String,
-        enum: ['customer', 'vendor', "admin"]
+        enum: ['customer', "admin"]
     },
     books: [{
         type: Schema.Types.ObjectId,

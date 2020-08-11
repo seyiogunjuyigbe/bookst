@@ -94,6 +94,17 @@ exports.login = async (req, res) => {
     }
 };
 
+exports.logout = async (req, res) => {
+    try {
+        req.session.destroy()
+        req.logout();
+        return res.status(200).redirect('/auth/login')
+
+    }
+    catch (error) {
+        return res.status(500).render('error', { err: error.message });
+    }
+}
 
 // ===EMAIL VERIFICATION
 // @route GET api/verify/:token

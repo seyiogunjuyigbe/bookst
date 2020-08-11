@@ -7,6 +7,11 @@ const transactionSchema = new Schema({
         ref: 'Book'
     },
     date_initiated: { type: Date, default: new Date() },
+    type: {
+        type: String,
+        enum: ["card", "bank", "ussd"],
+        default: "card"
+    },
     date_paid: Date,
     customer: { type: Schema.Types.ObjectId, ref: 'User' },
     reference: String,

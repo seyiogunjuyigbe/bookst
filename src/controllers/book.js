@@ -89,11 +89,12 @@ module.exports = {
                     'name': `${req.user.firstName} ${req.user.lastName}`
                 },
                 meta: {
-                    customer: req.user
+                    transactionId: transaction.id
                 },
                 customizations: {
                     title: `Purchase ${book.title}`,
                     description: book.description,
+                    logo: book.artCover
                 }
             })
             return res.status(200).redirect(response.data.data.link)
