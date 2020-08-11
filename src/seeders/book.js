@@ -1,5 +1,6 @@
 const Book = require('../models/book');
 const faker = require('faker');
+const urls = require('./books.json').books
 module.exports = async () => {
     try {
         let existing = await Book.findOne({ type: 'default' })
@@ -11,7 +12,7 @@ module.exports = async () => {
                     type: 'default',
                     price: faker.commerce.price(),
                     description: `${faker.company.catchPhraseDescriptor()} ${faker.random.words(15)}`,
-                    artCover: faker.image.imageUrl(500, 500, "fashion", true, true),
+                    artCover: urls[i],
                     vendor: "Oluwaseyi Ogunjuyigbe"
                 })
             }
