@@ -2,12 +2,11 @@
 const express = require('express');
 const { check } = require('express-validator');
 
-const { login, verify, register, resendToken } = require('../controllers/auth');
+const { login, renderRegister, renderLogin, verify, register, resendToken } = require('../controllers/auth');
 const { recover, reset, resetPassword } = require('../controllers/password');
 const validate = require('../middlewares/validate');
 const { checkAuth } = require('../middlewares/auth')
 const router = express.Router();
-
 router.post("/register", [
     check('firstName').not().isEmpty().withMessage('Required field'),
     check('lastName').not().isEmpty().withMessage('Required field'),
@@ -16,12 +15,9 @@ router.post("/register", [
     check('password').not().isEmpty().withMessage('Required field'),
 ], validate, register);
 
-router.get('/login', (req, res) => {
-    if (req.user) return res.redirect('/admin/dashboard')
-    let redirect = req.query.redirect;
-    if (redirect == undefined) redirect = null
-    return res.status(200).render('login', { err: null, redirect })
-})
+router.get("/login", renderLogin);
+router.get("/register", renderRegister);
+
 // router.get('/logout', logout)
 router.post("/login", [
     check('email').not().isEmpty().withMessage('email is required'),

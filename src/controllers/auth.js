@@ -1,15 +1,29 @@
 const User = require('../models/user');
+const Token = require('../models/token')
 const { success, error } = require('../middlewares/response')
-
+const { MAIL_SENDER, MAIL_PASS, MAIL_SERVICE, } = require('../config/config')
 const response = require('../middlewares/response');
-const { sendEmail } = require('../utils/index')
-
-
-
+const nodemailer = require('nodemailer');
+const transporter = nodemailer.createTransport({
+    host: String(MAIL_SERVICE),
+    port: 587,
+    ignoreTLS: false,
+    secure: false,
+    auth: {
+        user: String(MAIL_SENDER),
+        pass: String(MAIL_PASS)
+    }
+});
 
 // @route POST api/auth/register
 // @desc Register user
 // @access Public
+exports.renderLogin = (req, res) => {
+    return res.status(200).render('login', { err: null, redirect: req.query.redirect || null })
+}
+exports.renderRegister = (req, res) => {
+    return res.status(200).render('register', { err: null })
+}
 exports.register = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -17,17 +31,29 @@ exports.register = async (req, res) => {
         // Make sure this account doesn't already exist
         const user = await User.findOne({ email });
 
-        if (user) return res.status(401).json({ message: 'The email address you have entered is already associated with another account.' });
-
+        if (user) return res.status(401).render('register', { err: 'The email address you have entered is already associated with another account.' });
         const newUser = new User({ ...req.body });
         const user_ = await User.register(newUser, password)
         await user_.save();
-
-        // await sendVerificationEmail(user_, req, res);
-        return success(res, 200, { message: "User registered sucesfully", user_ })
-
+        let token = await user.generateVerificationToken();
+        await token.save()
+        const mailOptions = {
+            to: user.email,
+            from: MAIL_SENDER,
+            subject: 'Verify your Email',
+            html: `<h2>Your account registration was successful.</h2>
+                                    Click <a href = "${req.headers.host}/auth/verify/${token.token}">here</a> to verify your account`,
+        };
+        await transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log({ message: 'Mail not sent', reason: error.message, MAIL_SENDER })
+            } else {
+                console.log('Mail sent to ' + user.email);
+            }
+        })
+        return res.status(200).redirect('/auth/login')
     } catch (error) {
-        res.status(500).json({ success: false, message: error.message })
+        return res.render('register', { err: error.message })
     }
 };
 
@@ -40,28 +66,24 @@ exports.login = async (req, res) => {
 
         const user = await User.findOne({ email });
 
-        if (!user) return res.status(401).json({ msg: 'The email address ' + email + ' is not associated with any account. Double-check your email address and try again.' });
+        if (!user) return res.status(401).render("login", { redirect: redirect || null, err: 'The email address ' + email + ' is not associated with any account. Double-check your email address and try again.' });
 
         //validate password
         else {
             if (password) {
                 user.authenticate(password, (err, found, passwordErr) => {
                     if (err) {
-                        return response.error(res, 500, err.message)
+                        return res.render('login', { err: err.message, redirect: redirect || null })
                     } else if (passwordErr) {
-                        return response.error(res, 401, 'Incorrect email or password')
+                        return res.render('login', { err: 'Incorrect email or password', redirect: redirect || null })
                     } else if (found) {
                         req.login(user, function (err) {
-                            if (err) { return res.status(500).render('error/500', { message: err.message }) }
+                            if (err) { return res.render('login', { err: err.message, redirect: redirect || null }) }
                             else {
                                 req.session.user = req.user;
                                 req.session.save()
                                 if (redirect) return res.status(200).redirect(redirect)
-                                return res.status(200).json({
-                                    success: true,
-                                    message: 'Login successful',
-                                    user: req.user.email
-                                })
+                                return res.status(200).redirect('/')
                             }
                         });
                     }
@@ -69,7 +91,7 @@ exports.login = async (req, res) => {
             }
         }
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        return res.render('login', { err: error.message, redirect: redirect || null })
     }
 };
 

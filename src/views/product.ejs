@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%=book.title%></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="../../assets/img/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="../../assets/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="../../assets/vendor/fancybox/jquery.fancybox.css">
+    <link rel="stylesheet" href="../../assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/slick-carousel/slick/slick.css" />
+    <link rel="stylesheet" href="../../assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../assets/css/theme.css">
+</head>
+<header id="site-header" class="site-header__v1">
+    <div class="topbar border-bottom d-none d-md-block">
+        <div class="container-fluid px-2 px-md-5 px-xl-8d75">
+            <div class="topbar__nav d-md-flex justify-content-between align-items-center">
+                <ul class="topbar__nav--left nav ml-md-n3">
+                </ul>
+                <ul class="topbar__nav--right nav mr-md-n3">
+                    <% if(user){ %>
+                    <li class="nav-item"><a id="sidebarNavToggler" href="javascript:;" role="button"
+                            class="nav-link link-black-100" aria-controls="sidebarContent1" aria-haspopup="true"
+                            aria-expanded="false" data-unfold-event="click" data-unfold-hide-on-scroll="false"
+                            data-unfold-target="#sidebarContent1" data-unfold-type="css-animation" data-unfold-overlay='{
+                                        "className": "u-sidebar-bg-overlay",
+                                        "background": "rgba(0, 0, 0, .7)",
+                                        "animationSpeed": 500
+                                    }' data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight"
+                            data-unfold-duration="500"><i class="glph-icon flaticon-heart"></i></a></li>
+                    <% } %>
+                    <% if(!user){ %>
+                    <li class="nav-item">
+
+                        <a href="/auth/login">
+                            <i class="glph-icon flaticon-user"></i>
+                        </a>
+
+                    </li>
+                    <% } %>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="masthead border-bottom position-relative" style="margin-bottom: -1px;">
+        <div class="container-fluid px-3 px-md-5 px-xl-8d75 py-2 py-md-0">
+            <div class="d-flex align-items-center position-relative flex-wrap">
+                <div class="site-branding pr-md-4">
+                    <a href="/" class="d-block mb-1">
+                        BookReaper
+                    </a>
+                </div>
+                <div class="site-navigation mr-auto d-none d-xl-block">
+                    <ul class="nav">
+                        <li class="nav-item"><a href="#"
+                                class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium active border-bottom border-primary border-width-2">Categories</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="site-search ml-xl-0 ml-md-auto w-r-100 my-2 my-xl-0">
+                    <form class="form-inline">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <i
+                                    class="glph-icon flaticon-loupe input-group-text py-2d75 bg-white-100 border-white-100"></i>
+                            </div>
+                            <input class="form-control bg-white-100 min-width-380 py-2d75 height-4 border-white-100"
+                                type="search" placeholder="Search for Books by Keyword ..." aria-label="Search">
+                        </div>
+                        <button class="btn btn-outline-success my-2 my-sm-0 sr-only" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<body>
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main ">
+            <div class="product">
+                <div class="container">
+                    <div class="row">
+                        <div
+                            class="col-md-5 woocommerce-product-gallery woocommerce-product-gallery--with-images images">
+                            <figure class="woocommerce-product-gallery__wrapper pt-8 mb-0">
+                                <div class="js-slick-carousel u-slick"
+                                    data-pagi-classes="text-center u-slick__pagination my-4">
+                                    <div class="js-slide">
+                                        <img src="<%=book.artCover%>" alt="<%=book.title%>" class="mx-auto img-fluid">
+                                    </div>
+                            </figure>
+                        </div>
+                        <div class="col-md-7 pl-0 summary entry-summary border-left">
+                            <div class="space-top-2 px-4 px-xl-7 border-bottom pb-5">
+                                <h1 class="product_title entry-title font-size-7 mb-3"><%=book.title%></h1>
+                                <div class="font-size-2 mb-4">
+                                    <span class="text-yellow-darker">
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                        <span class="fas fa-star"></span>
+                                    </span>
+                                    <span class="ml-3 font-weight-medium">By (vendor)</span>
+                                    <span class="ml-2 text-gray-600"><%=book.vendor%></span>
+                                </div>
+                                <p class="price font-size-22 font-weight-medium mb-3">
+                                    <span class="woocommerce-Price-amount amount">
+                                        <span class="woocommerce-Price-currencySymbol">N</span><%=book.price%>
+                                    </span>
+                                </p>
+
+
+                                <div class="woocommerce-product-details__short-description font-size-2 mb-5">
+                                    <p class=""><%=book.description%>.</p>
+                                </div>
+
+                                <a href="/books/<%=book._id%>/purchase"
+                                    class="btn btn-dark border-0 rounded-0 p-3 min-width-250 ml-md-4 single_add_to_cart_button button alt">Purchase</a>
+                            </div>
+                            <div class="px-4 px-xl-7 py-5 d-flex align-items-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

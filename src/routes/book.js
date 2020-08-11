@@ -16,5 +16,6 @@ router.put('/:bookId', checkAuth, parser.single('artCover'), [
 router.get('/', bookCtrl.fetchAllbooks);
 router.get('/:bookId', bookCtrl.fetchThisBook);
 router.delete('/:bookId', checkAuth, bookCtrl.deleteBook);
+router.get('/:bookId/purchase', checkAuth, bookCtrl.purchaseBook)
 
 module.exports = router;

@@ -2,6 +2,11 @@ const { success, error } = require('../middlewares/response');
 const Book = require('../models/book')
 const User = require('../models/user')
 const Transaction = require('../models/transaction')
+const Ravepay = require('flutterwave-node');
+const { PUBLIC_KEY, SECRET_KEY } = require('../config/config')
+const rave = new Ravepay(PUBLIC_KEY, SECRET_KEY);
+const axios = require('axios').default
+axios.defaults.headers.common['Authorization'] = `Bearer ${SECRET_KEY}`;
 
 module.exports = {
     async createBook(req, res) {
@@ -63,7 +68,7 @@ module.exports = {
     }, async fetchThisBook(req, res) {
         try {
             let book = await Book.findById(req.params.bookId)
-            return success(res, 200, book)
+            return res.status(200).render('product', { book, user: req.user })
         } catch (err) {
             return error(res, 500, err.message)
         }
@@ -71,10 +76,29 @@ module.exports = {
     async purchaseBook(req, res) {
         try {
             let book = await Book.findById(req.params.bookId)
-            let newTransaction = Transaction.create({
+            let transaction = await Transaction.create({
                 book, customer: req.user.id
             });
-
+            await transaction.save()
+            let response = await axios.post("https://api.flutterwave.com/v3/payments", {
+                tx_ref: transaction.token,
+                amount: book.price,
+                payment_options: 'card',
+                redirect_url: `${req.headers.host}/transaction/${transaction.id}/complete`,
+                customer: {
+                    'email': req.user.email,
+                    'phonenumber': req.user.phone,
+                    'name': `${req.user.firstName} ${req.user.lastName}`
+                },
+                meta: {
+                    customer: req.user
+                },
+                customizations: {
+                    title: `Purchase ${book.title}`,
+                    description: book.description,
+                }
+            })
+            return res.status(200).redirect(response.data.data.link)
         } catch (err) {
             return error(res, 500, err.message)
         }
