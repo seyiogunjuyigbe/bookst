@@ -1,76 +1,119 @@
-<div id="signup1" style="display: none; opacity: 0;" data-target-group="idForm1">
+<!DOCTYPE html>
+<html lang="en">
 
-    <header class="border-bottom px-4 px-md-6 py-4">
-        <h2 class="font-size-3 mb-0 d-flex align-items-center"><i class="flaticon-resume mr-3 font-size-5"></i>Create
-            Account</h2>
-    </header>
+<head>
 
-    <form action="/auth/register" method="post">
-        div class="p-4 p-md-6">
-        <div class="form-group mb-4">
-            <div class="js-form-message js-focus-state">
-                <label id="firstName" class="form-label" for="firstName">First Name
-                    *</label>
-                <input type="text" class="form-control rounded-0 height-4 px-4" name="firstName" id="firstName"
-                    placeholder="John" aria-label="John" aria-describedby="firstName" required>
+    <title>Register</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="../../assets/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="../../assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/slick-carousel/slick/slick.css" />
+    <link rel="stylesheet" href="../../assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+
+    <link rel="stylesheet" href="../../assets/css/theme.css">
+</head>
+
+<body>
+    <div class="container col-lg-4">
+        <div class="p-4 p-md-4">
+            <div id="signup1" opacity: 0;" data-target-group="idForm1">
+
+                <header class="border-bottom px-4 px-md-6 py-4">
+                    <h2 class="font-size-3 mb-0 d-flex align-items-center"><i
+                            class="flaticon-resume mr-3 font-size-5"></i>Create
+                        Account</h2>
+                </header>
+                <div class="p-4 p-md-6">
+                    <form action="/auth/register" method="POST">
+
+                        <div class="form-group mb-4">
+                            <div class="js-form-message js-focus-state">
+                                <label id="firstName" class="form-label" for="firstName">First Name
+                                    *</label>
+                                <input type="text" class="form-control rounded-0 height-4 px-4" name="firstName"
+                                    id="firstName" placeholder="John" aria-label="John" aria-describedby="firstName"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <div class="js-form-message js-focus-state">
+                                <label id="lastName" class="form-label" for="lastName">Last Name
+                                    *</label>
+                                <input type="text" class="form-control rounded-0 height-4 px-4" name="lastName"
+                                    id="lastName" placeholder="Doe" aria-label="Doe" aria-describedby="lastName"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <div class="js-form-message js-focus-state">
+                                <label id="signinEmailLabel11" class="form-label" for="signinEmail11">Email
+                                    *</label>
+                                <input type="email" class="form-control rounded-0 height-4 px-4" name="email"
+                                    id="signinEmail11" placeholder="creativelayers088@gmail.com"
+                                    aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel11"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <div class="js-form-message js-focus-state">
+                                <label id="phone" class="form-label" for="phone">Phone Number
+                                    *</label>
+                                <input type="tel" class="form-control rounded-0 height-4 px-4" name="phone" id="phone"
+                                    placeholder="08123324545" aria-label="08123324545" aria-describedby="phone"
+                                    required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group mb-4">
+                            <div class="js-form-message js-focus-state">
+                                <label id="signinPasswordLabel11" class="form-label" for="signinPassword11">Password
+                                    *</label>
+                                <input type="password" class="form-control rounded-0 height-4 px-4" name="password"
+                                    id="signinPassword11" placeholder="" aria-label=""
+                                    aria-describedby="signinPasswordLabel11" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group mb-4">
+                            <div class="js-form-message js-focus-state">
+                                <label id="signupConfirmPasswordLabel9" class="form-label"
+                                    for="signupConfirmPassword9">Confirm
+                                    Password
+                                    *</label>
+                                <input type="password" class="form-control rounded-0 height-4 px-4"
+                                    name="confirmPassword" id="signupConfirmPassword9" placeholder="" aria-label=""
+                                    aria-describedby="signupConfirmPasswordLabel9" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Create
+                                Account</button>
+                        </div>
+                        <div class="text-center mb-4">
+                            <span class="small text-muted">Already have an account?</span>
+                            <a href="/auth/login">Login
+                            </a>
+                        </div>
+
+                    </form>
+                    <% if(err) {%>
+                    <p class="text-center text-danger">
+                        <%=err%>
+                    </p>
+                    <%  } %>
+                </div>
             </div>
         </div>
-        <div class="form-group mb-4">
-            <div class="js-form-message js-focus-state">
-                <label id="lastName" class="form-label" for="lastName">Last Name
-                    *</label>
-                <input type="text" class="form-control rounded-0 height-4 px-4" name="lastName" id="lastName"
-                    placeholder="Doe" aria-label="Doe" aria-describedby="lastName" required>
-            </div>
-        </div>
-        <div class="form-group mb-4">
-            <div class="js-form-message js-focus-state">
-                <label id="signinEmailLabel11" class="form-label" for="signinEmail11">Email
-                    *</label>
-                <input type="email" class="form-control rounded-0 height-4 px-4" name="email" id="signinEmail11"
-                    placeholder="creativelayers088@gmail.com" aria-label="creativelayers088@gmail.com"
-                    aria-describedby="signinEmailLabel11" required>
-            </div>
-        </div>
-        <div class="form-group mb-4">
-            <div class="js-form-message js-focus-state">
-                <label id="phone" class="form-label" for="phone">Phone Number
-                    *</label>
-                <input type="tel" class="form-control rounded-0 height-4 px-4" name="phone" id="phone"
-                    placeholder="08123324545" aria-label="08123324545" aria-describedby="phone" required>
-            </div>
-        </div>
+    </div>
+</body>
 
-
-        <div class="form-group mb-4">
-            <div class="js-form-message js-focus-state">
-                <label id="signinPasswordLabel11" class="form-label" for="signinPassword11">Password *</label>
-                <input type="password" class="form-control rounded-0 height-4 px-4" name="password"
-                    id="signinPassword11" placeholder="" aria-label="" aria-describedby="signinPasswordLabel11"
-                    required>
-            </div>
-        </div>
-
-
-        <div class="form-group mb-4">
-            <div class="js-form-message js-focus-state">
-                <label id="signupConfirmPasswordLabel9" class="form-label" for="signupConfirmPassword9">Confirm Password
-                    *</label>
-                <input type="password" class="form-control rounded-0 height-4 px-4" name="confirmPassword"
-                    id="signupConfirmPassword9" placeholder="" aria-label=""
-                    aria-describedby="signupConfirmPasswordLabel9" required>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <button type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Create
-                Account</button>
-        </div>
-        <div class="text-center mb-4">
-            <span class="small text-muted">Already have an account?</span>
-            <a href="/auth/login">Login
-            </a>
-        </div>
-</div>
-</form>
-< </div>
+</html>
