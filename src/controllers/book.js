@@ -2,9 +2,7 @@ const { success, error } = require('../middlewares/response');
 const Book = require('../models/book')
 const User = require('../models/user')
 const Transaction = require('../models/transaction')
-const Ravepay = require('flutterwave-node');
-const { PUBLIC_KEY, SECRET_KEY } = require('../config/config')
-const rave = new Ravepay(PUBLIC_KEY, SECRET_KEY);
+const { SECRET_KEY } = require('../config/config')
 const axios = require('axios').default
 axios.defaults.headers.common['Authorization'] = `Bearer ${SECRET_KEY}`;
 

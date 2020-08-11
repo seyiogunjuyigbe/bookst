@@ -7,11 +7,13 @@ const User = require('./models/user');
 const cors = require('cors');
 const path = require('path');
 const passport = require('passport');
-const seedBooks = require('./seeders/book')
+const seedBooks = require('./seeders/book');
+const seedAdmin = require('./seeders/merchant')
 const LocalStrategy = require('passport-local').Strategy
 var port = PORT || process.env.PORT || 3000
 startDb();
-seedBooks()
+seedBooks();
+seedAdmin()
 const initRoutes = require('./routes/routes');
 
 app.use(cors());

@@ -2,7 +2,6 @@ const User = require('../models/user');
 const Token = require('../models/token')
 const { success, error } = require('../middlewares/response')
 const { MAIL_SENDER, MAIL_PASS, MAIL_SERVICE, } = require('../config/config')
-const response = require('../middlewares/response');
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
     host: String(MAIL_SERVICE),
@@ -44,7 +43,7 @@ exports.register = async (req, res) => {
             html: `<h2>Your account registration was successful.</h2>
                                     Click <a href = "${req.headers.host}/auth/verify/${token.token}">here</a> to verify your account`,
         };
-        await transporter.sendMail(mailOptions, function (error, info) {
+        transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log({ message: 'Mail not sent', reason: error.message })
             } else {

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Order Received | Bookworm</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="../../assets/img/favicon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="../../assets/vendor/animate.css/animate.css">
+    <link rel="stylesheet" href="../../assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/slick-carousel/slick/slick.css" />
+    <link rel="stylesheet" href="../../assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+
+    <link rel="stylesheet" href="../../assets/css/theme.css">
+</head>
+
+<body>
+    <main id="content">
+        <div class="bg-gray-200 space-bottom-3">
+            <div class="container">
+                <div class="py-5 py-lg-7">
+                    <h6 class="font-weight-medium font-size-7 text-center mt-lg-1">Order Received</h6>
+                </div>
+                <div class="max-width-890 mx-auto">
+                    <div class="bg-white pt-6 border">
+                        <h6 class="font-size-3 font-weight-medium text-center mb-4 pb-xl-1">Thank you. Your order has
+                            been received.</h6>
+                        <div class="border-bottom mb-5 pb-5 overflow-auto overflow-md-visible">
+                            <div class="pl-3">
+                                <table class="table table-borderless mb-0 ml-1">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="font-size-2 font-weight-normal py-0">Order number:
+                                            </th>
+                                            <th scope="col" class="font-size-2 font-weight-normal py-0">Date:</th>
+                                            <th scope="col" class="font-size-2 font-weight-normal py-0 text-md-center">
+                                                Total: </th>
+                                            <th scope="col"
+                                                class="font-size-2 font-weight-normal py-0 text-md-right pr-md-9">
+                                                Payment method:</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" class="pr-0 py-0 font-weight-medium">1779</th>
+                                            <td class="pr-0 py-0 font-weight-medium">March 24, 2020</td>
+                                            <td class="pr-0 py-0 font-weight-medium text-md-center">$2930</td>
+                                            <td class="pr-md-4 py-0 font-weight-medium text-md-right">Direct bank
+                                                transfer</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="border-bottom mb-5 pb-6">
+                            <div class="px-3 px-md-4">
+                                <div class="ml-md-2">
+                                    <h6 class="font-size-3 on-weight-medium mb-4 pb-1">Order Details</h6>
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <div class="d-flex align-items-baseline">
+                                            <div>
+                                                <h6 class="font-size-2 font-weight-normal mb-1">The Overdue Life of <br>
+                                                    Amy Byler</h6>
+                                                <span class="font-size-2 text-gray-600">(Paperback, English)</span>
+                                            </div>
+                                            <span class="font-size-2 ml-4 ml-md-8">x7</span>
+                                        </div>
+                                        <span class="font-weight-medium font-size-2">$951</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+    <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="../../assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+    <script src="../../assets/vendor/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../../assets/vendor/bootstrap/bootstrap.min.js"></script>
+    <script src="../../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="../../assets/vendor/slick-carousel/slick/slick.min.js"></script>
+    <script src="../../assets/vendor/multilevel-sliding-mobile-menu/dist/jquery.zeynep.js"></script>
+    <script src="../../assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <script src="../../assets/js/hs.core.js"></script>
+    <script src="../../assets/js/components/hs.unfold.js"></script>
+    <script src="../../assets/js/components/hs.malihu-scrollbar.js"></script>
+    <script src="../../assets/js/components/hs.header.js"></script>
+    <script src="../../assets/js/components/hs.slick-carousel.js"></script>
+    <script src="../../assets/js/components/hs.selectpicker.js"></script>
+    <script src="../../assets/js/components/hs.show-animation.js"></script>
+
+
+    <script>
+        $(document).on('ready', function () {
+            // initialization of unfold component
+            $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+
+            // initialization of slick carousel
+            $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+
+            // initialization of header
+            $.HSCore.components.HSHeader.init($('#header'));
+
+            // initialization of malihu scrollbar
+            $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+
+            // initialization of show animations
+            $.HSCore.components.HSShowAnimation.init('.js-animation-link');
+
+            // init zeynepjs
+            var zeynep = $('.zeynep').zeynep({
+                onClosed: function () {
+                    // enable main wrapper element clicks on any its children element
+                    $("body main").attr("style", "");
+
+                    console.log('the side menu is closed.');
+                },
+                onOpened: function () {
+                    // disable main wrapper element clicks on any its children element
+                    $("body main").attr("style", "pointer-events: none;");
+
+                    console.log('the side menu is opened.');
+                }
+            });
+
+            // handle zeynep overlay click
+            $(".zeynep-overlay").click(function () {
+                zeynep.close();
+            });
+
+            // open side menu if the button is clicked
+            $(".cat-menu").click(function () {
+                if ($("html").hasClass("zeynep-opened")) {
+                    zeynep.close();
+                } else {
+                    zeynep.open();
+                }
+            });
+        });
+    </script>
+</body>
+
+<!-- Mirrored from demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/html-demo/shop/order-received.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Aug 2020 08:53:22 GMT -->
+
+</html>
