@@ -66,7 +66,6 @@ module.exports = {
     async fetchAllTransactions(req, res) {
         try {
             let transactions = await Transaction.find({}).populate('book customer').sort({ date_initiated: "asc" })
-            console.log(transactions)
             return res.render("transactions", { transactions })
         } catch (err) {
             return res.render("error", { message: err.message })
